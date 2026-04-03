@@ -40,7 +40,7 @@ export default function TableDemo() {
         <TableCaption>
           {isRtl ? "قائمة بالفواتير الأخيرة." : "A list of your recent invoices."}
         </TableCaption>
-        <TableHeader>
+        <TableHeader className="bg-muted">
           <TableRow>
             <TableHead className="w-[100px]">
               {isRtl ? "الفاتورة" : "Invoice"}
