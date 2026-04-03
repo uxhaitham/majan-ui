@@ -36,10 +36,10 @@ export default function ButtonIconSizes() {
       </p>
       <div className="flex items-center gap-1">
         <Button variant="outline" size="icon-sm">
-          <ChevronLeft />
+          <ChevronLeft className="rtl:rotate-180" />
         </Button>
         <Button variant="outline" size="icon-sm">
-          <ChevronRight />
+          <ChevronRight className="rtl:rotate-180" />
         </Button>
       </div>
     </div>

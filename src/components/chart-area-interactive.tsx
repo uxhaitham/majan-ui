@@ -250,7 +250,7 @@ export function ChartAreaInteractive({ isRtl = false }: { isRtl?: boolean } = {}
               minTickGap={32}
               tickFormatter={(value) => {
                 const date = new Date(value)
-                return date.toLocaleDateString("en-US", {
+                return date.toLocaleDateString(isRtl ? "ar" : "en-US", {
                   month: "short",
                   day: "numeric",
                 })
@@ -261,7 +261,7 @@ export function ChartAreaInteractive({ isRtl = false }: { isRtl?: boolean } = {}
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    return new Date(value).toLocaleDateString(isRtl ? "ar" : "en-US", {
                       month: "short",
                       day: "numeric",
                     })

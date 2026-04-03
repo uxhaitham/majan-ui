@@ -20,16 +20,20 @@ export function ComponentPreview({
   const [copiedInstall, setCopiedInstall] = useState(false)
 
   const handleCopyCode = async () => {
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch { /* clipboard not available */ }
   }
 
   const handleCopyInstall = async () => {
     if (!installCommand) return
-    await navigator.clipboard.writeText(installCommand)
-    setCopiedInstall(true)
-    setTimeout(() => setCopiedInstall(false), 2000)
+    try {
+      await navigator.clipboard.writeText(installCommand)
+      setCopiedInstall(true)
+      setTimeout(() => setCopiedInstall(false), 2000)
+    } catch { /* clipboard not available */ }
   }
 
   return (
@@ -114,7 +118,7 @@ export function ComponentPreview({
                 >
                   {tokens.map((line, i) => (
                     <div key={i} {...getLineProps({ line })}>
-                      <span className="mr-4 inline-block w-8 select-none text-right text-muted-foreground/40">
+                      <span className="me-4 inline-block w-8 select-none text-end text-muted-foreground/40">
                         {i + 1}
                       </span>
                       {line.map((token, key) => (

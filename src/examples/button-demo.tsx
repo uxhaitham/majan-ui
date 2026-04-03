@@ -25,9 +25,9 @@ export default function ButtonDemo() {
   const TrailingArrow = isRtl ? ArrowLeft : ArrowRight
 
   return (
-    <div ref={ref} className="space-y-8">
+    <div ref={ref} className="flex flex-col gap-8">
       {/* Variants × Sizes */}
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <p className="text-xs font-medium text-muted-foreground">{t.xs}</p>
         <div className="flex flex-wrap items-center gap-2">
           <Button size="xs">{t.default}</Button>
@@ -67,7 +67,7 @@ export default function ButtonDemo() {
       </div>
 
       {/* With Icons */}
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <p className="text-xs font-medium text-muted-foreground">{t.withIcon}</p>
         <div className="flex flex-wrap items-center gap-2">
           <Button size="xs"><Mail /> {t.mail}</Button>
@@ -84,7 +84,7 @@ export default function ButtonDemo() {
       </div>
 
       {/* Icon Only */}
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         <p className="text-xs font-medium text-muted-foreground">{t.iconOnly}</p>
         <div className="flex flex-wrap items-center gap-2">
           <Button size="icon" variant="outline"><Mail /></Button>

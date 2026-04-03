@@ -134,7 +134,24 @@ function DragHandle({ id }: { id: number }) {
   )
 }
 
-const columns: ColumnDef<z.infer<typeof schema>>[] = [
+function createColumns(isRtl: boolean): ColumnDef<z.infer<typeof schema>>[] {
+  const t = {
+    header: isRtl ? "العنوان" : "Header",
+    sectionType: isRtl ? "نوع القسم" : "Section Type",
+    status: isRtl ? "الحالة" : "Status",
+    target: isRtl ? "الهدف" : "Target",
+    limit: isRtl ? "الحد" : "Limit",
+    reviewer: isRtl ? "المراجع" : "Reviewer",
+    assignReviewer: isRtl ? "تعيين مراجع" : "Assign reviewer",
+    edit: isRtl ? "تعديل" : "Edit",
+    copy: isRtl ? "نسخ" : "Make a copy",
+    favorite: isRtl ? "مفضلة" : "Favorite",
+    delete: isRtl ? "حذف" : "Delete",
+    done: isRtl ? "مكتمل" : "Done",
+    inProgress: isRtl ? "قيد التنفيذ" : "In Progress",
+  }
+
+return [
   {
     id: "drag",
     header: () => null,
@@ -168,15 +185,15 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "header",
-    header: "Header",
+    header: t.header,
     cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />
+      return <TableCellViewer item={row.original} isRtl={isRtl} />
     },
     enableHiding: false,
   },
   {
     accessorKey: "type",
-    header: "Section Type",
+    header: t.sectionType,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="px-1.5 text-muted-foreground">
@@ -187,7 +204,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t.status,
     cell: ({ row }) => (
       <Badge variant="outline" className="px-1.5 text-muted-foreground">
         {row.original.status === "Done" ? (
@@ -201,7 +218,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "target",
-    header: () => <div className="w-full text-end">Target</div>,
+    header: () => <div className="w-full text-end">{t.target}</div>,
     cell: ({ row }) => (
       <form
         onSubmit={(e) => {
@@ -226,7 +243,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "limit",
-    header: () => <div className="w-full text-end">Limit</div>,
+    header: () => <div className="w-full text-end">{t.limit}</div>,
     cell: ({ row }) => (
       <form
         onSubmit={(e) => {
@@ -251,7 +268,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "reviewer",
-    header: "Reviewer",
+    header: t.reviewer,
     cell: ({ row }) => {
       const isAssigned = row.original.reviewer !== "Assign reviewer"
 
@@ -262,7 +279,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
       return (
         <>
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
-            Reviewer
+            {t.reviewer}
           </Label>
           <Select>
             <SelectTrigger
@@ -270,7 +287,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
               size="sm"
               id={`${row.original.id}-reviewer`}
             >
-              <SelectValue placeholder="Assign reviewer" />
+              <SelectValue placeholder={t.assignReviewer} />
             </SelectTrigger>
             <SelectContent align="end">
               <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
@@ -298,16 +315,17 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
+          <DropdownMenuItem>{t.edit}</DropdownMenuItem>
+          <DropdownMenuItem>{t.copy}</DropdownMenuItem>
+          <DropdownMenuItem>{t.favorite}</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">{t.delete}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
   },
 ]
+}
 
 function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
@@ -342,6 +360,7 @@ export function DataTable({
   isRtl?: boolean
 }) {
   const dir = isRtl ? "rtl" : "ltr"
+  const columns = React.useMemo(() => createColumns(isRtl), [isRtl])
   const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -421,29 +440,29 @@ export function DataTable({
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent dir={dir}>
-            <SelectItem value="outline">Outline</SelectItem>
-            <SelectItem value="past-performance">Past Performance</SelectItem>
-            <SelectItem value="key-personnel">Key Personnel</SelectItem>
-            <SelectItem value="focus-documents">Focus Documents</SelectItem>
+            <SelectItem value="outline">{isRtl ? "المخطط" : "Outline"}</SelectItem>
+            <SelectItem value="past-performance">{isRtl ? "الأداء السابق" : "Past Performance"}</SelectItem>
+            <SelectItem value="key-personnel">{isRtl ? "الموظفون الرئيسيون" : "Key Personnel"}</SelectItem>
+            <SelectItem value="focus-documents">{isRtl ? "وثائق التركيز" : "Focus Documents"}</SelectItem>
           </SelectContent>
         </Select>
         <TabsList className="hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="outline">Outline</TabsTrigger>
+          <TabsTrigger value="outline">{isRtl ? "المخطط" : "Outline"}</TabsTrigger>
           <TabsTrigger value="past-performance">
-            Past Performance <Badge variant="secondary">3</Badge>
+            {isRtl ? "الأداء السابق" : "Past Performance"} <Badge variant="secondary">3</Badge>
           </TabsTrigger>
           <TabsTrigger value="key-personnel">
-            Key Personnel <Badge variant="secondary">2</Badge>
+            {isRtl ? "الموظفون الرئيسيون" : "Key Personnel"} <Badge variant="secondary">2</Badge>
           </TabsTrigger>
-          <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
+          <TabsTrigger value="focus-documents">{isRtl ? "وثائق التركيز" : "Focus Documents"}</TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
           <DropdownMenu dir={dir}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
                 <IconLayoutColumns />
-                <span className="hidden lg:inline">Customize Columns</span>
-                <span className="lg:hidden">Columns</span>
+                <span className="hidden lg:inline">{isRtl ? "تخصيص الأعمدة" : "Customize Columns"}</span>
+                <span className="lg:hidden">{isRtl ? "الأعمدة" : "Columns"}</span>
                 <IconChevronDown />
               </Button>
             </DropdownMenuTrigger>
@@ -473,7 +492,7 @@ export function DataTable({
           </DropdownMenu>
           <Button variant="outline" size="sm">
             <IconPlus />
-            <span className="hidden lg:inline">Add Section</span>
+            <span className="hidden lg:inline">{isRtl ? "إضافة قسم" : "Add Section"}</span>
           </Button>
         </div>
       </div>
@@ -524,7 +543,7 @@ export function DataTable({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      {isRtl ? "لا توجد نتائج." : "No results."}
                     </TableCell>
                   </TableRow>
                 )}
@@ -534,13 +553,14 @@ export function DataTable({
         </div>
         <div className="flex items-center justify-between px-4">
           <div className="hidden flex-1 text-sm text-muted-foreground lg:flex">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
+            {isRtl
+              ? `${table.getFilteredSelectedRowModel().rows.length} من ${table.getFilteredRowModel().rows.length} صف(وف) محدد.`
+              : `${table.getFilteredSelectedRowModel().rows.length} of ${table.getFilteredRowModel().rows.length} row(s) selected.`}
           </div>
           <div className="flex w-full items-center gap-8 lg:w-fit">
             <div className="hidden items-center gap-2 lg:flex">
               <Label htmlFor="rows-per-page" className="text-sm font-medium">
-                Rows per page
+                {isRtl ? "صفوف في الصفحة" : "Rows per page"}
               </Label>
               <Select
                 value={`${table.getState().pagination.pageSize}`}
@@ -563,8 +583,9 @@ export function DataTable({
               </Select>
             </div>
             <div className="flex w-fit items-center justify-center text-sm font-medium">
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
+              {isRtl
+                ? `صفحة ${table.getState().pagination.pageIndex + 1} من ${table.getPageCount()}`
+                : `Page ${table.getState().pagination.pageIndex + 1} of ${table.getPageCount()}`}
             </div>
             <div className="ms-auto flex items-center gap-2 lg:ms-0">
               <Button
@@ -574,7 +595,7 @@ export function DataTable({
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to first page</span>
-                <IconChevronsLeft />
+                <IconChevronsLeft className="rtl:rotate-180" />
               </Button>
               <Button
                 variant="outline"
@@ -584,7 +605,7 @@ export function DataTable({
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to previous page</span>
-                <IconChevronLeft />
+                <IconChevronLeft className="rtl:rotate-180" />
               </Button>
               <Button
                 variant="outline"
@@ -594,7 +615,7 @@ export function DataTable({
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to next page</span>
-                <IconChevronRight />
+                <IconChevronRight className="rtl:rotate-180" />
               </Button>
               <Button
                 variant="outline"
@@ -604,7 +625,7 @@ export function DataTable({
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to last page</span>
-                <IconChevronsRight />
+                <IconChevronsRight className="rtl:rotate-180" />
               </Button>
             </div>
           </div>
@@ -649,21 +670,21 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
+function TableCellViewer({ item, isRtl = false }: { item: z.infer<typeof schema>; isRtl?: boolean }) {
   const isMobile = useIsMobile()
 
   return (
-    <Drawer direction={isMobile ? "bottom" : "right"}>
+    <Drawer direction={isMobile ? "bottom" : isRtl ? "left" : "right"}>
       <DrawerTrigger asChild>
         <Button variant="link" className="w-fit px-0 text-start text-foreground">
           {item.header}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent dir={isRtl ? "rtl" : "ltr"}>
         <DrawerHeader className="gap-1">
           <DrawerTitle>{item.header}</DrawerTitle>
           <DrawerDescription>
-            Showing total visitors for the last 6 months
+            {isRtl ? "إجمالي الزوار لآخر 6 أشهر" : "Showing total visitors for the last 6 months"}
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
@@ -674,8 +695,8 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                   accessibilityLayer
                   data={chartData}
                   margin={{
-                    left: 0,
-                    right: 10,
+                    left: isRtl ? 10 : 0,
+                    right: isRtl ? 0 : 10,
                   }}
                 >
                   <CartesianGrid vertical={false} />
@@ -712,13 +733,13 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator />
               <div className="grid gap-2">
                 <div className="flex gap-2 leading-none font-medium">
-                  Trending up by 5.2% this month{" "}
+                  {isRtl ? "ارتفاع بنسبة 5.2% هذا الشهر" : "Trending up by 5.2% this month"}{" "}
                   <IconTrendingUp className="size-4" />
                 </div>
                 <div className="text-muted-foreground">
-                  Showing total visitors for the last 6 months. This is just
-                  some random text to test the layout. It spans multiple lines
-                  and should wrap around.
+                  {isRtl
+                    ? "إجمالي الزوار لآخر 6 أشهر. هذا نص عشوائي لاختبار التخطيط. يمتد على عدة أسطر ويجب أن يلتف."
+                    : "Showing total visitors for the last 6 months. This is just some random text to test the layout. It spans multiple lines and should wrap around."}
                 </div>
               </div>
               <Separator />
@@ -726,65 +747,65 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           )}
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
-              <Label htmlFor="header">Header</Label>
+              <Label htmlFor="header">{isRtl ? "العنوان" : "Header"}</Label>
               <Input id="header" defaultValue={item.header} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="type">Type</Label>
+                <Label htmlFor="type">{isRtl ? "النوع" : "Type"}</Label>
                 <Select defaultValue={item.type}>
                   <SelectTrigger id="type" className="w-full">
-                    <SelectValue placeholder="Select a type" />
+                    <SelectValue placeholder={isRtl ? "اختر نوعًا" : "Select a type"} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Table of Contents">
-                      Table of Contents
+                      {isRtl ? "جدول المحتويات" : "Table of Contents"}
                     </SelectItem>
                     <SelectItem value="Executive Summary">
-                      Executive Summary
+                      {isRtl ? "الملخص التنفيذي" : "Executive Summary"}
                     </SelectItem>
                     <SelectItem value="Technical Approach">
-                      Technical Approach
+                      {isRtl ? "النهج التقني" : "Technical Approach"}
                     </SelectItem>
-                    <SelectItem value="Design">Design</SelectItem>
-                    <SelectItem value="Capabilities">Capabilities</SelectItem>
+                    <SelectItem value="Design">{isRtl ? "التصميم" : "Design"}</SelectItem>
+                    <SelectItem value="Capabilities">{isRtl ? "القدرات" : "Capabilities"}</SelectItem>
                     <SelectItem value="Focus Documents">
-                      Focus Documents
+                      {isRtl ? "وثائق التركيز" : "Focus Documents"}
                     </SelectItem>
-                    <SelectItem value="Narrative">Narrative</SelectItem>
-                    <SelectItem value="Cover Page">Cover Page</SelectItem>
+                    <SelectItem value="Narrative">{isRtl ? "السرد" : "Narrative"}</SelectItem>
+                    <SelectItem value="Cover Page">{isRtl ? "صفحة الغلاف" : "Cover Page"}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="flex flex-col gap-3">
-                <Label htmlFor="status">Status</Label>
+                <Label htmlFor="status">{isRtl ? "الحالة" : "Status"}</Label>
                 <Select defaultValue={item.status}>
                   <SelectTrigger id="status" className="w-full">
-                    <SelectValue placeholder="Select a status" />
+                    <SelectValue placeholder={isRtl ? "اختر الحالة" : "Select a status"} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Done">Done</SelectItem>
-                    <SelectItem value="In Progress">In Progress</SelectItem>
-                    <SelectItem value="Not Started">Not Started</SelectItem>
+                    <SelectItem value="Done">{isRtl ? "مكتمل" : "Done"}</SelectItem>
+                    <SelectItem value="In Progress">{isRtl ? "قيد التنفيذ" : "In Progress"}</SelectItem>
+                    <SelectItem value="Not Started">{isRtl ? "لم يبدأ" : "Not Started"}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="target">Target</Label>
+                <Label htmlFor="target">{isRtl ? "الهدف" : "Target"}</Label>
                 <Input id="target" defaultValue={item.target} />
               </div>
               <div className="flex flex-col gap-3">
-                <Label htmlFor="limit">Limit</Label>
+                <Label htmlFor="limit">{isRtl ? "الحد" : "Limit"}</Label>
                 <Input id="limit" defaultValue={item.limit} />
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <Label htmlFor="reviewer">Reviewer</Label>
+              <Label htmlFor="reviewer">{isRtl ? "المراجع" : "Reviewer"}</Label>
               <Select defaultValue={item.reviewer}>
                 <SelectTrigger id="reviewer" className="w-full">
-                  <SelectValue placeholder="Select a reviewer" />
+                  <SelectValue placeholder={isRtl ? "اختر مراجعًا" : "Select a reviewer"} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
@@ -798,9 +819,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
           </form>
         </div>
         <DrawerFooter>
-          <Button>Submit</Button>
+          <Button>{isRtl ? "إرسال" : "Submit"}</Button>
           <DrawerClose asChild>
-            <Button variant="outline">Done</Button>
+            <Button variant="outline">{isRtl ? "تم" : "Done"}</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

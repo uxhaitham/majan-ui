@@ -1,3 +1,6 @@
 export function formatComponentName(name: string) {
-  return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, " ")
+  return name
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
 }

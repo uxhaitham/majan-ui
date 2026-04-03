@@ -12,7 +12,7 @@ export function Sidebar({ category }: SidebarProps) {
   const groups = getComponentGroups(category)
 
   return (
-    <aside className="sticky top-14 h-[calc(100vh-3.5rem)] w-56 shrink-0 overflow-y-auto border-r py-6 pr-4 pl-6">
+    <aside className="sticky top-14 h-[calc(100vh-3.5rem)] w-56 shrink-0 overflow-y-auto border-e py-6 pe-4 ps-6">
       <nav className="space-y-6">
         {Object.entries(groups).map(([group, items]) => (
           <div key={group}>

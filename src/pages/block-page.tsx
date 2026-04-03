@@ -51,7 +51,7 @@ export function BlockPage() {
             aria-label={`Switch to ${dir === "ltr" ? "RTL" : "LTR"} direction`}
           >
             <Languages className="h-3.5 w-3.5" />
-            {dir === "ltr" ? "RTL" : "LTR"}
+            {dir.toUpperCase()}
           </button>
           <Link
             to={`/blocks/${name}/preview`}
@@ -90,6 +90,7 @@ export function BlockPreviewPage() {
     function sync() {
       const theme = parentRoot.getAttribute("data-theme")
       const isDark = parentRoot.classList.contains("dark")
+      const dir = parentRoot.getAttribute("dir")
 
       if (theme) {
         root.setAttribute("data-theme", theme)
@@ -97,6 +98,12 @@ export function BlockPreviewPage() {
         root.removeAttribute("data-theme")
       }
       root.classList.toggle("dark", isDark)
+
+      if (dir) {
+        root.setAttribute("dir", dir)
+      } else {
+        root.removeAttribute("dir")
+      }
     }
 
     // Sync immediately
@@ -106,7 +113,7 @@ export function BlockPreviewPage() {
     const observer = new MutationObserver(sync)
     observer.observe(parentRoot, {
       attributes: true,
-      attributeFilter: ["class", "data-theme"],
+      attributeFilter: ["class", "data-theme", "dir"],
     })
 
     return () => observer.disconnect()

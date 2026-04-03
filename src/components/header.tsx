@@ -62,7 +62,7 @@ export function Header({
         </div>
 
         {/* Right: Search, Theme, Mode */}
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ms-auto flex items-center gap-2">
           {/* Search trigger */}
           <button className="inline-flex h-9 items-center gap-2 rounded-md border bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
             <Search className="h-4 w-4" />
@@ -79,7 +79,7 @@ export function Header({
               value={theme}
               onChange={(e) => onThemeChange(e.target.value as Theme)}
               aria-label="Select theme"
-              className="cursor-pointer appearance-none border-none bg-transparent pr-1 text-sm outline-none"
+              className="cursor-pointer appearance-none border-none bg-transparent pe-1 text-sm outline-none"
             >
               {THEMES.map((t) => (
                 <option key={t.value} value={t.value}>
