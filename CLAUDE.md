@@ -131,7 +131,7 @@ Theme switching: `data-theme` attribute on `<html>`, dark mode via `.dark` class
 ## Gotchas
 
 - **Radix data attributes**: Radix sets `data-orientation="horizontal"`, NOT `data-horizontal`. Use `data-[orientation=horizontal]:` in Tailwind, not `data-horizontal:` (the latter checks for a boolean attribute that doesn't exist)
-- **Portal components and RTL**: Sheet, Drawer, and other portal-based components render outside the `[dir]` wrapper. Pass `dir={dir}` explicitly on the portal content for RTL to work
+- **Portal components and RTL**: Sheet, Drawer, Select render outside the `[dir]` wrapper. Pass `dir={dir}` explicitly on the portal content (e.g., `SheetContent`, `DrawerContent`, `SelectContent`) for RTL to work. Exception: `DropdownMenu` propagates `dir` through Radix context — pass `dir` on the `<DropdownMenu>` root, not on `DropdownMenuContent`
 - **Portal components and RTL positioning**: Use logical properties (`end-3`) instead of physical (`right-3`) for elements inside portals that need RTL flipping
 - **Vertical separators**: Use `self-stretch` (not `h-full`) for vertical separators in flex containers — `h-full` requires an explicit parent height
 - **Iframe theme sync**: Don't use `postMessage` — use `MutationObserver` on `window.parent.document.documentElement` (same-origin iframe)

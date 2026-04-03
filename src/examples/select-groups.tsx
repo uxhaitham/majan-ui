@@ -15,13 +15,13 @@ export default function SelectGroups() {
 
   return (
     <div ref={ref}>
-      <Select dir={dir}>
+      <Select>
         <SelectTrigger className="w-full max-w-48">
           <SelectValue
             placeholder={isRtl ? "اختر فاكهة" : "Select a fruit"}
           />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent dir={dir}>
           <SelectGroup>
             <SelectLabel>{isRtl ? "الفواكه" : "Fruits"}</SelectLabel>
             <SelectItem value="apple">

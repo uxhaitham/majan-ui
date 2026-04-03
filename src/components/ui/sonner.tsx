@@ -1,3 +1,4 @@
+import * as React from "react"
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -7,7 +8,7 @@ import {
 } from "lucide-react"
 import { Toaster as Sonner, toast, type ToasterProps } from "sonner"
 
-const Toaster = ({ ...props }: ToasterProps) => {
+function Toaster({ ...props }: ToasterProps) {
   return (
     <Sonner
       className="toaster group"

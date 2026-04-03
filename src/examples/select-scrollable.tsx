@@ -14,13 +14,13 @@ export default function SelectScrollable() {
 
   return (
     <div ref={ref}>
-      <Select dir={dir}>
+      <Select>
         <SelectTrigger className="w-full max-w-64">
           <SelectValue
             placeholder={isRtl ? "اختر منطقة زمنية" : "Select a timezone"}
           />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent dir={dir}>
           <SelectGroup>
             <SelectLabel>
               {isRtl ? "أمريكا الشمالية" : "North America"}
