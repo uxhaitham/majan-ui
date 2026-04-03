@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils"
 import { formatComponentName } from "@/lib/format"
 import { useTheme } from "@/hooks/use-theme"
 
-// Auto-discover all prototype view files (excludes views.ts)
+// Auto-discover all prototype view files (.tsx only, so views.ts is excluded)
 const viewModules = import.meta.glob<{ default: React.ComponentType }>(
-  "@/prototypes/*/!(views).tsx"
+  "@/prototypes/*/*.tsx"
 )
 
 const viewComponents: Record<
