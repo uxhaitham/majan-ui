@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Majan UI</title>
     <script>
-      // Prevent dark mode flash — reads localStorage before first paint
+      // Prevent dark mode flash — query params (iframe embeds) take priority over localStorage
       try {
-        const mode = localStorage.getItem("majan-mode");
-        const theme = localStorage.getItem("majan-theme");
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get("mode") || localStorage.getItem("majan-mode");
+        const theme = params.get("theme") || localStorage.getItem("majan-theme");
         if (mode === "light") {
           document.documentElement.classList.remove("dark");
         }

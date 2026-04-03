@@ -4,29 +4,53 @@ import { ComponentPreview } from "@/components/component-preview"
 import { components } from "@/lib/registry-config"
 import { formatComponentName } from "@/lib/format"
 
-// Lazy-load example demos via glob — no manual map needed
-const demoModules = import.meta.glob<{ default: React.ComponentType }>(
-  "@/examples/*-demo.tsx"
+// Lazy-load all example files: both {name}-demo.tsx and {name}-{variant}.tsx
+const allDemoModules = import.meta.glob<{ default: React.ComponentType }>(
+  "@/examples/*.tsx"
 )
 
-// Pre-build a map of name → lazy component so we never call lazy() during render
-const demoComponents: Record<string, React.LazyExoticComponent<React.ComponentType>> = {}
-for (const key of Object.keys(demoModules)) {
-  const name = key.split("/").pop()!.replace("-demo.tsx", "")
-  demoComponents[name] = lazy(() => demoModules[key]())
-}
-
-// Source code loaded via Vite ?raw imports
-const sources: Record<string, string> = {}
-
-const rawImports = import.meta.glob("@/examples/*-demo.tsx", {
+// Raw source for code view
+const allRawImports = import.meta.glob("@/examples/*.tsx", {
   query: "?raw",
   eager: true,
 }) as Record<string, { default: string }>
 
-for (const [path, mod] of Object.entries(rawImports)) {
-  const name = path.split("/").pop()!.replace("-demo.tsx", "")
-  sources[name] = mod.default
+interface DemoEntry {
+  label: string
+  Component: React.LazyExoticComponent<React.ComponentType>
+  source: string
+}
+
+// Build a map of componentName → [{ label, Component, source }, ...]
+const demosByComponent: Record<string, DemoEntry[]> = {}
+
+for (const key of Object.keys(allDemoModules)) {
+  const filename = key.split("/").pop()!.replace(".tsx", "")
+
+  // Find which component this belongs to by matching the longest registered name prefix
+  const matchedComponent = components
+    .filter((c) => c.category === "components" && filename.startsWith(c.name + "-"))
+    .sort((a, b) => b.name.length - a.name.length)[0]
+
+  if (!matchedComponent) continue
+
+  const suffix = filename.slice(matchedComponent.name.length + 1) // "demo", "vertical", etc.
+  const label = suffix === "demo" ? "Default" : formatComponentName(suffix)
+
+  if (!demosByComponent[matchedComponent.name]) {
+    demosByComponent[matchedComponent.name] = []
+  }
+
+  demosByComponent[matchedComponent.name].push({
+    label,
+    Component: lazy(() => allDemoModules[key]()),
+    source: allRawImports[key]?.default || "// Source not available",
+  })
+}
+
+// Sort so "Default" (demo) always comes first
+for (const demos of Object.values(demosByComponent)) {
+  demos.sort((a, b) => (a.label === "Default" ? -1 : b.label === "Default" ? 1 : 0))
 }
 
 export function ComponentPage() {
@@ -35,10 +59,9 @@ export function ComponentPage() {
   if (!name) return <Navigate to="/components" replace />
 
   const meta = components.find((c) => c.name === name)
-  const DemoComponent = demoComponents[name]
-  const source = sources[name]
+  const demos = demosByComponent[name]
 
-  if (!meta || !DemoComponent) {
+  if (!meta || !demos?.length) {
     return (
       <div className="py-12 text-center text-muted-foreground">
         <p>Component "{name}" not found.</p>
@@ -58,19 +81,28 @@ export function ComponentPage() {
         <p className="mt-1 text-muted-foreground">{meta.description}</p>
       </div>
 
-      {/* Preview */}
-      <ComponentPreview
-        code={source || "// Source not available"}
-        installCommand={installCommand}
-      >
-        <Suspense
-          fallback={
-            <div className="text-sm text-muted-foreground">Loading...</div>
-          }
-        >
-          <DemoComponent />
-        </Suspense>
-      </ComponentPreview>
+      {/* Examples — each in its own preview container */}
+      {demos.map((demo) => (
+        <div key={demo.label} className="space-y-2">
+          {demos.length > 1 && (
+            <h2 className="text-sm font-medium text-muted-foreground">
+              {demo.label}
+            </h2>
+          )}
+          <ComponentPreview
+            code={demo.source}
+            installCommand={demo.label === "Default" ? installCommand : undefined}
+          >
+            <Suspense
+              fallback={
+                <div className="text-sm text-muted-foreground">Loading...</div>
+              }
+            >
+              <demo.Component />
+            </Suspense>
+          </ComponentPreview>
+        </div>
+      ))}
     </div>
   )
 }
