@@ -148,7 +148,28 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  isRtl = false,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { isRtl?: boolean }) {
+  const navMain = isRtl
+    ? data.navMain.map((item, i) => ({
+        ...item,
+        title: ["لوحة التحكم", "دورة الحياة", "التحليلات", "المشاريع", "الفريق"][i],
+      }))
+    : data.navMain
+  const navSecondary = isRtl
+    ? data.navSecondary.map((item, i) => ({
+        ...item,
+        title: ["الإعدادات", "المساعدة", "البحث"][i],
+      }))
+    : data.navSecondary
+  const documents = isRtl
+    ? data.documents.map((item, i) => ({
+        ...item,
+        name: ["مكتبة البيانات", "التقارير", "مساعد الكتابة"][i],
+      }))
+    : data.documents
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -167,9 +188,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={navMain} />
+        <NavDocuments items={documents} isRtl={isRtl} />
+        <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

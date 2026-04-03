@@ -103,6 +103,42 @@ export const components: ComponentMeta[] = [
     group: "Overlay",
   },
   {
+    name: "breadcrumb",
+    description: "Displays a breadcrumb navigation trail with links.",
+    category: "components",
+    group: "Navigation",
+  },
+  {
+    name: "chart",
+    description: "A chart component built on top of Recharts.",
+    category: "components",
+    group: "Data Display",
+  },
+  {
+    name: "sidebar",
+    description: "A composable sidebar layout with collapsible groups and menus.",
+    category: "components",
+    group: "Navigation",
+  },
+  {
+    name: "sonner",
+    description: "An opinionated toast component powered by Sonner.",
+    category: "components",
+    group: "Feedback",
+  },
+  {
+    name: "toggle",
+    description: "A two-state button that can be on or off.",
+    category: "components",
+    group: "Inputs",
+  },
+  {
+    name: "toggle-group",
+    description: "A group of toggle items where one or multiple can be active.",
+    category: "components",
+    group: "Inputs",
+  },
+  {
     name: "task-card",
     description: "A composed card showing a task with status badge and actions.",
     category: "components",

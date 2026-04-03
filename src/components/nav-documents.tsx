@@ -27,18 +27,20 @@ import {
 
 export function NavDocuments({
   items,
+  isRtl = false,
 }: {
   items: {
     name: string
     url: string
     icon: Icon
   }[]
+  isRtl?: boolean
 }) {
   const { isMobile } = useSidebar()
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Documents</SidebarGroupLabel>
+      <SidebarGroupLabel>{isRtl ? "المستندات" : "Documents"}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
