@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Majan UI</title>
+    <script>
+      // Prevent dark mode flash — reads localStorage before first paint
+      try {
+        const mode = localStorage.getItem("majan-mode");
+        const theme = localStorage.getItem("majan-theme");
+        if (mode === "light") {
+          document.documentElement.classList.remove("dark");
+        }
+        if (theme && theme !== "default") {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
