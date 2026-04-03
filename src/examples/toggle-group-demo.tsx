@@ -10,32 +10,36 @@ export default function ToggleGroupDemo() {
       <p className="text-xs font-medium text-muted-foreground">
         {isRtl ? "فردي" : "Single"}
       </p>
-      <ToggleGroup type="single" defaultValue="center">
-        <ToggleGroupItem value="left" aria-label="Align left">
-          <AlignLeft />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="center" aria-label="Align center">
-          <AlignCenter />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="right" aria-label="Align right">
-          <AlignRight />
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <div className="inline-flex w-fit rounded-lg bg-muted/50">
+        <ToggleGroup type="single" defaultValue="center">
+          <ToggleGroupItem value="left" aria-label="Align left">
+            <AlignLeft />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="center" aria-label="Align center">
+            <AlignCenter />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="right" aria-label="Align right">
+            <AlignRight />
+          </ToggleGroupItem>
+        </ToggleGroup>
+      </div>
 
       <p className="text-xs font-medium text-muted-foreground">
         {isRtl ? "متعدد" : "Multiple"}
       </p>
-      <ToggleGroup type="multiple" defaultValue={["bold"]}>
-        <ToggleGroupItem value="bold" aria-label="Toggle bold">
-          <Bold />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="italic" aria-label="Toggle italic">
-          <Italic />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="underline" aria-label="Toggle underline">
-          <Underline />
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <div className="inline-flex w-fit rounded-lg bg-muted/50">
+        <ToggleGroup type="multiple" defaultValue={["bold"]}>
+          <ToggleGroupItem value="bold" aria-label="Toggle bold">
+            <Bold />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="italic" aria-label="Toggle italic">
+            <Italic />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="underline" aria-label="Toggle underline">
+            <Underline />
+          </ToggleGroupItem>
+        </ToggleGroup>
+      </div>
 
       <p className="text-xs font-medium text-muted-foreground">
         {isRtl ? "محدد" : "Outline"}

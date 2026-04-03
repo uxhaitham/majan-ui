@@ -17,6 +17,10 @@
         if (theme && theme !== "default") {
           document.documentElement.setAttribute("data-theme", theme);
         }
+        const dir = params.get("dir");
+        if (dir === "rtl" || dir === "ltr") {
+          document.documentElement.setAttribute("dir", dir);
+        }
       } catch (_) {}
     </script>
   </head>

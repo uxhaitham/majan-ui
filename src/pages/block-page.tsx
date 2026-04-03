@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom"
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
+import { Maximize, Languages } from "lucide-react"
 import { components } from "@/lib/registry-config"
 import { formatComponentName } from "@/lib/format"
 import { useTheme } from "@/hooks/use-theme"
@@ -20,6 +21,7 @@ for (const key of Object.keys(blockModules)) {
 export function BlockPage() {
   const { name } = useParams<{ name: string }>()
   const { theme, mode } = useTheme()
+  const [dir, setDir] = useState<"ltr" | "rtl">("ltr")
 
   if (!name) return <Navigate to="/blocks" replace />
 
@@ -42,17 +44,28 @@ export function BlockPage() {
           </h1>
           <p className="mt-1 text-muted-foreground">{meta.description}</p>
         </div>
-        <Link
-          to={`/blocks/${name}/preview`}
-          className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-        >
-          Full-screen preview
-        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setDir(dir === "ltr" ? "rtl" : "ltr")}
+            className="inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            aria-label={`Switch to ${dir === "ltr" ? "RTL" : "LTR"} direction`}
+          >
+            <Languages className="h-3.5 w-3.5" />
+            {dir === "ltr" ? "RTL" : "LTR"}
+          </button>
+          <Link
+            to={`/blocks/${name}/preview`}
+            className="inline-flex items-center justify-center rounded-md border p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            aria-label="Full-screen preview"
+          >
+            <Maximize className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-lg border bg-background">
         <iframe
-          src={`/blocks/${name}/preview?theme=${theme}&mode=${mode}`}
+          src={`/blocks/${name}/preview?theme=${theme}&mode=${mode}&dir=${dir}`}
           className="h-[800px] w-full border-0"
           title={`${formatComponentName(name)} preview`}
         />
@@ -63,6 +76,8 @@ export function BlockPage() {
 
 export function BlockPreviewPage() {
   const { name } = useParams<{ name: string }>()
+
+  // dir is handled by the inline script in index.html (runs before React mounts)
 
   // Sync theme with parent window (same-origin iframe)
   useEffect(() => {

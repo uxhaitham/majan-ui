@@ -14,7 +14,7 @@ export default function CardStat() {
   const { ref, isRtl } = useDir()
 
   return (
-    <div ref={ref} className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+    <div ref={ref} className="grid w-full max-w-2xl grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs dark:*:data-[slot=card]:bg-card sm:grid-cols-2">
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>

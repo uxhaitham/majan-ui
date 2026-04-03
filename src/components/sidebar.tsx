@@ -16,7 +16,7 @@ export function Sidebar({ category }: SidebarProps) {
       <nav className="space-y-6">
         {Object.entries(groups).map(([group, items]) => (
           <div key={group}>
-            <h4 className="mb-2 text-sm font-semibold text-foreground">
+            <h4 className="mb-2 px-2 text-xs font-medium text-muted-foreground">
               {group}
             </h4>
             <ul className="space-y-0.5">
@@ -28,10 +28,10 @@ export function Sidebar({ category }: SidebarProps) {
                     <Link
                       to={path}
                       className={cn(
-                        "block rounded-md px-2.5 py-1.5 text-sm transition-colors",
+                        "block rounded-md px-2 py-1 text-sm transition-colors",
                         isActive
                           ? "bg-accent text-accent-foreground font-medium"
-                          : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                          : "text-foreground hover:bg-accent/50"
                       )}
                     >
                       {formatComponentName(item.name)}
