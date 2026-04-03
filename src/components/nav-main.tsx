@@ -11,12 +11,14 @@ import {
 
 export function NavMain({
   items,
+  isRtl = false,
 }: {
   items: {
     title: string
     url: string
     icon?: Icon
   }[]
+  isRtl?: boolean
 }) {
   return (
     <SidebarGroup>
@@ -24,11 +26,11 @@ export function NavMain({
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
             <SidebarMenuButton
-              tooltip="Quick Create"
+              tooltip={isRtl ? "إنشاء سريع" : "Quick Create"}
               className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
             >
               <IconCirclePlusFilled />
-              <span>Quick Create</span>
+              <span>{isRtl ? "إنشاء سريع" : "Quick Create"}</span>
             </SidebarMenuButton>
             <Button
               size="icon"
@@ -36,7 +38,7 @@ export function NavMain({
               variant="outline"
             >
               <IconMail />
-              <span className="sr-only">Inbox</span>
+              <span className="sr-only">{isRtl ? "البريد" : "Inbox"}</span>
             </Button>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -11,6 +11,7 @@ import { Toaster as Sonner, toast, type ToasterProps } from "sonner"
 function Toaster({ ...props }: ToasterProps) {
   return (
     <Sonner
+      data-slot="sonner"
       className="toaster group"
       icons={{
         success: <CircleCheckIcon className="size-4" />,

@@ -29,9 +29,9 @@ export default function Dashboard01Demo() {
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <SectionCards isRtl={isRtl} />
               <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
+                <ChartAreaInteractive isRtl={isRtl} />
               </div>
-              <DataTable data={data} />
+              <DataTable data={data} isRtl={isRtl} />
             </div>
           </div>
         </div>

@@ -29,19 +29,22 @@ import {
 
 export function NavUser({
   user,
+  isRtl = false,
 }: {
   user: {
     name: string
     email: string
     avatar: string
   }
+  isRtl?: boolean
 }) {
   const { isMobile } = useSidebar()
+  const dir = isRtl ? "rtl" : "ltr"
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu>
+        <DropdownMenu dir={dir}>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
@@ -84,21 +87,21 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <IconUserCircle />
-                Account
+                {isRtl ? "الحساب" : "Account"}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconCreditCard />
-                Billing
+                {isRtl ? "الفواتير" : "Billing"}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconNotification />
-                Notifications
+                {isRtl ? "الإشعارات" : "Notifications"}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <IconLogout />
-              Log out
+              {isRtl ? "تسجيل الخروج" : "Log out"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

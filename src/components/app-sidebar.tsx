@@ -188,12 +188,12 @@ export function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMain} />
+        <NavMain items={navMain} isRtl={isRtl} />
         <NavDocuments items={documents} isRtl={isRtl} />
         <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={data.user} isRtl={isRtl} />
       </SidebarFooter>
     </Sidebar>
   )

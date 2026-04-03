@@ -37,6 +37,7 @@ export function NavDocuments({
   isRtl?: boolean
 }) {
   const { isMobile } = useSidebar()
+  const dir = isRtl ? "rtl" : "ltr"
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -50,7 +51,7 @@ export function NavDocuments({
                 <span>{item.name}</span>
               </a>
             </SidebarMenuButton>
-            <DropdownMenu>
+            <DropdownMenu dir={dir}>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction
                   showOnHover
