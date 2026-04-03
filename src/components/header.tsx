@@ -1,12 +1,23 @@
 import { Link, useLocation } from "react-router-dom"
-import { Sun, Moon, Search, Palette } from "lucide-react"
+import { Sun, Moon, Search, Palette, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import type { Theme, Mode } from "@/hooks/use-theme"
 
 const NAV_ITEMS = [
   { label: "Components", path: "/components" },
   { label: "Blocks", path: "/blocks" },
   { label: "Charts", path: "/charts" },
+]
+
+const PROTOTYPE_PROJECTS = [
+  { label: "Pulse", path: "/prototyping/pulse" },
+  { label: "Project Flow", path: "/prototyping/project-flow" },
 ]
 
 const THEMES: { value: Theme; label: string }[] = [
@@ -58,6 +69,28 @@ export function Header({
                 {item.label}
               </Link>
             ))}
+
+            {/* Prototyping dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                className={cn(
+                  "inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                  location.pathname.startsWith("/prototyping")
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                Prototyping
+                <ChevronDown className="h-3.5 w-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {PROTOTYPE_PROJECTS.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link to={item.path}>{item.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
         </div>
 
