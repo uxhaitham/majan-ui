@@ -49,6 +49,12 @@ export const components: ComponentMeta[] = [
     group: "Overlay",
   },
   {
+    name: "popover",
+    description: "Displays rich content in a portal, triggered by a button.",
+    category: "components",
+    group: "Overlay",
+  },
+  {
     name: "skeleton",
     description: "A placeholder loading animation for content.",
     category: "components",

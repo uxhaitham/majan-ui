@@ -1,3 +1,4 @@
+import { useDir } from "@/hooks/use-dir"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,99 +21,101 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 export default function ProjectFlowSettings() {
+  const { ref, isRtl } = useDir()
+
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div ref={ref} className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Workspace */}
         <Card>
           <CardHeader>
-            <CardTitle>Workspace</CardTitle>
-            <CardDescription>General workspace settings</CardDescription>
+            <CardTitle>{isRtl ? "مساحة العمل" : "Workspace"}</CardTitle>
+            <CardDescription>{isRtl ? "إعدادات مساحة العمل العامة" : "General workspace settings"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="ws-name">Workspace Name</Label>
-              <Input id="ws-name" defaultValue="Haitham's Workspace" />
+              <Label htmlFor="ws-name">{isRtl ? "اسم مساحة العمل" : "Workspace Name"}</Label>
+              <Input id="ws-name" defaultValue={isRtl ? "مساحة عمل هيثم" : "Haitham's Workspace"} />
             </div>
             <div className="space-y-2">
-              <Label>Default View</Label>
+              <Label>{isRtl ? "العرض الافتراضي" : "Default View"}</Label>
               <Select defaultValue="board">
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="board">Board</SelectItem>
-                  <SelectItem value="list">List</SelectItem>
-                  <SelectItem value="table">Table</SelectItem>
-                  <SelectItem value="calendar">Calendar</SelectItem>
+                  <SelectItem value="board">{isRtl ? "لوحة" : "Board"}</SelectItem>
+                  <SelectItem value="list">{isRtl ? "قائمة" : "List"}</SelectItem>
+                  <SelectItem value="table">{isRtl ? "جدول" : "Table"}</SelectItem>
+                  <SelectItem value="calendar">{isRtl ? "تقويم" : "Calendar"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save</Button>
+            <Button>{isRtl ? "حفظ" : "Save"}</Button>
           </CardFooter>
         </Card>
 
         {/* Task defaults */}
         <Card>
           <CardHeader>
-            <CardTitle>Task Defaults</CardTitle>
-            <CardDescription>Default values for new tasks</CardDescription>
+            <CardTitle>{isRtl ? "إعدادات المهام الافتراضية" : "Task Defaults"}</CardTitle>
+            <CardDescription>{isRtl ? "القيم الافتراضية للمهام الجديدة" : "Default values for new tasks"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Default Priority</Label>
+              <Label>{isRtl ? "الأولوية الافتراضية" : "Default Priority"}</Label>
               <Select defaultValue="medium">
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="low">Low</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="low">{isRtl ? "منخفض" : "Low"}</SelectItem>
+                  <SelectItem value="medium">{isRtl ? "متوسط" : "Medium"}</SelectItem>
+                  <SelectItem value="high">{isRtl ? "عالي" : "High"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Default Assignee</Label>
+              <Label>{isRtl ? "المسؤول الافتراضي" : "Default Assignee"}</Label>
               <Select defaultValue="me">
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="me">Me</SelectItem>
-                  <SelectItem value="unassigned">Unassigned</SelectItem>
+                  <SelectItem value="me">{isRtl ? "أنا" : "Me"}</SelectItem>
+                  <SelectItem value="unassigned">{isRtl ? "غير محدد" : "Unassigned"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <Separator />
             <div className="space-y-3">
-              <Label>Auto-actions</Label>
+              <Label>{isRtl ? "الإجراءات التلقائية" : "Auto-actions"}</Label>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Checkbox id="auto-assign" defaultChecked />
                   <Label htmlFor="auto-assign" className="font-normal">
-                    Auto-assign tasks I create to myself
+                    {isRtl ? "تعيين المهام التي أنشئها لنفسي تلقائياً" : "Auto-assign tasks I create to myself"}
                   </Label>
                 </div>
                 <div className="flex items-center gap-2">
                   <Checkbox id="auto-close" />
                   <Label htmlFor="auto-close" className="font-normal">
-                    Auto-close tasks when all subtasks are done
+                    {isRtl ? "إغلاق المهام تلقائياً عند اكتمال جميع المهام الفرعية" : "Auto-close tasks when all subtasks are done"}
                   </Label>
                 </div>
                 <div className="flex items-center gap-2">
                   <Checkbox id="auto-notify" defaultChecked />
                   <Label htmlFor="auto-notify" className="font-normal">
-                    Notify on task status changes
+                    {isRtl ? "إشعار عند تغيير حالة المهمة" : "Notify on task status changes"}
                   </Label>
                 </div>
               </div>
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save Defaults</Button>
+            <Button>{isRtl ? "حفظ الإعدادات" : "Save Defaults"}</Button>
           </CardFooter>
         </Card>
       </div>

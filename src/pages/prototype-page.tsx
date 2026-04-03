@@ -1,6 +1,5 @@
 import { useParams, Navigate, Link } from "react-router-dom"
-import { lazy, Suspense, useEffect } from "react"
-import { useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { Maximize, Languages } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { formatComponentName } from "@/lib/format"
@@ -139,6 +138,8 @@ export function PrototypePage() {
 
 export function PrototypePreviewPage() {
   const { project, view } = useParams<{ project: string; view: string }>()
+
+  // dir is handled by the inline script in index.html (runs before React mounts)
 
   // Sync theme with parent window (same-origin iframe)
   useEffect(() => {

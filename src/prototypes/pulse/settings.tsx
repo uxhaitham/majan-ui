@@ -1,3 +1,4 @@
+import { useDir } from "@/hooks/use-dir"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,68 +21,73 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 export default function PulseSettings() {
+  const { ref, isRtl } = useDir()
+
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div ref={ref} className="min-h-screen bg-background p-6">
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Profile */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Your display name and email for notifications</CardDescription>
+            <CardTitle>{isRtl ? "الملف الشخصي" : "Profile"}</CardTitle>
+            <CardDescription>{isRtl ? "اسمك وبريدك الإلكتروني للإشعارات" : "Your display name and email for notifications"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Display Name</Label>
-              <Input id="name" defaultValue="Haitham" />
+              <Label htmlFor="name">{isRtl ? "الاسم المعروض" : "Display Name"}</Label>
+              <Input id="name" defaultValue={isRtl ? "هيثم" : "Haitham"} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{isRtl ? "البريد الإلكتروني" : "Email"}</Label>
               <Input id="email" type="email" defaultValue="haitham@example.com" />
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save Changes</Button>
+            <Button>{isRtl ? "حفظ التغييرات" : "Save Changes"}</Button>
           </CardFooter>
         </Card>
 
         {/* Feed preferences */}
         <Card>
           <CardHeader>
-            <CardTitle>Feed Preferences</CardTitle>
-            <CardDescription>Customize your briefing feed</CardDescription>
+            <CardTitle>{isRtl ? "تفضيلات الموجز" : "Feed Preferences"}</CardTitle>
+            <CardDescription>{isRtl ? "خصّص موجز الأخبار الخاص بك" : "Customize your briefing feed"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Default Sort</Label>
+              <Label>{isRtl ? "الترتيب الافتراضي" : "Default Sort"}</Label>
               <Select defaultValue="latest">
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="latest">Latest First</SelectItem>
-                  <SelectItem value="popular">Most Popular</SelectItem>
-                  <SelectItem value="relevant">Most Relevant</SelectItem>
+                  <SelectItem value="latest">{isRtl ? "الأحدث أولاً" : "Latest First"}</SelectItem>
+                  <SelectItem value="popular">{isRtl ? "الأكثر شعبية" : "Most Popular"}</SelectItem>
+                  <SelectItem value="relevant">{isRtl ? "الأكثر صلة" : "Most Relevant"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Briefing Frequency</Label>
+              <Label>{isRtl ? "تكرار الموجز" : "Briefing Frequency"}</Label>
               <Select defaultValue="daily">
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="realtime">Real-time</SelectItem>
-                  <SelectItem value="hourly">Hourly</SelectItem>
-                  <SelectItem value="daily">Daily Digest</SelectItem>
+                  <SelectItem value="realtime">{isRtl ? "فوري" : "Real-time"}</SelectItem>
+                  <SelectItem value="hourly">{isRtl ? "كل ساعة" : "Hourly"}</SelectItem>
+                  <SelectItem value="daily">{isRtl ? "ملخص يومي" : "Daily Digest"}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <Separator />
             <div className="space-y-3">
-              <Label>Categories</Label>
+              <Label>{isRtl ? "الفئات" : "Categories"}</Label>
               <div className="space-y-2">
-                {["Business", "Tech", "Politics", "Infrastructure", "Energy", "Tourism"].map(
+                {(isRtl
+                  ? ["أعمال", "تقنية", "سياسة", "بنية تحتية", "طاقة", "سياحة"]
+                  : ["Business", "Tech", "Politics", "Infrastructure", "Energy", "Tourism"]
+                ).map(
                   (cat) => (
                     <div key={cat} className="flex items-center gap-2">
                       <Checkbox id={cat} defaultChecked />
@@ -95,38 +101,38 @@ export default function PulseSettings() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save Preferences</Button>
+            <Button>{isRtl ? "حفظ التفضيلات" : "Save Preferences"}</Button>
           </CardFooter>
         </Card>
 
         {/* Notifications */}
         <Card>
           <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>Control how you receive updates</CardDescription>
+            <CardTitle>{isRtl ? "الإشعارات" : "Notifications"}</CardTitle>
+            <CardDescription>{isRtl ? "تحكم في كيفية تلقي التحديثات" : "Control how you receive updates"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center gap-2">
               <Checkbox id="email-notif" defaultChecked />
               <Label htmlFor="email-notif" className="font-normal">
-                Email notifications
+                {isRtl ? "إشعارات البريد الإلكتروني" : "Email notifications"}
               </Label>
             </div>
             <div className="flex items-center gap-2">
               <Checkbox id="breaking" defaultChecked />
               <Label htmlFor="breaking" className="font-normal">
-                Breaking news alerts
+                {isRtl ? "تنبيهات الأخبار العاجلة" : "Breaking news alerts"}
               </Label>
             </div>
             <div className="flex items-center gap-2">
               <Checkbox id="weekly" />
               <Label htmlFor="weekly" className="font-normal">
-                Weekly summary
+                {isRtl ? "ملخص أسبوعي" : "Weekly summary"}
               </Label>
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save Notifications</Button>
+            <Button>{isRtl ? "حفظ الإشعارات" : "Save Notifications"}</Button>
           </CardFooter>
         </Card>
       </div>
