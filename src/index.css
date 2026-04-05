@@ -407,28 +407,28 @@
 }
 
 /* ===== Project Flow theme — style overrides ===== */
-/* Personality: clean, efficient, high-density (Lyra-inspired) */
+/* Personality: warm, focused, productive (Pulse shapes + tight density) */
 
 [data-theme="project-flow"] [data-slot="button"] {
-  @apply rounded-none ring-1 ring-border shadow-none;
+  @apply rounded-lg shadow-xs;
 }
 [data-theme="project-flow"] [data-slot="button"][data-variant="destructive"] {
-  @apply bg-destructive/10 text-destructive ring-0
+  @apply bg-destructive/10 text-destructive shadow-none
     hover:bg-destructive/20
     dark:bg-destructive/20 dark:hover:bg-destructive/30;
 }
 [data-theme="project-flow"] [data-slot="button"][data-variant="outline"] {
-  @apply rounded-none shadow-none;
+  @apply rounded-lg shadow-none;
 }
 [data-theme="project-flow"] [data-slot="button"][data-variant="ghost"] {
-  @apply rounded-none ring-0;
+  @apply rounded-lg shadow-none;
 }
 [data-theme="project-flow"] [data-slot="button"][data-variant="link"] {
-  @apply ring-0;
+  @apply shadow-none;
 }
 
 [data-theme="project-flow"] [data-slot="badge"] {
-  @apply rounded-none;
+  @apply rounded-lg h-5 px-2;
 }
 [data-theme="project-flow"] [data-slot="badge"][data-variant="destructive"] {
   @apply bg-destructive/10 text-destructive [a&]:hover:bg-destructive/20
@@ -436,10 +436,10 @@
 }
 
 [data-theme="project-flow"] [data-slot="card"] {
-  @apply rounded-none shadow-none ring-1 ring-border border-none gap-4 py-4;
+  @apply rounded-2xl shadow-sm border border-border/50 gap-4 py-4;
 }
 [data-theme="project-flow"] [data-slot="card-header"] {
-  @apply px-4 gap-1;
+  @apply px-4 gap-1.5;
 }
 [data-theme="project-flow"] [data-slot="card-title"] {
   @apply text-sm;
@@ -452,11 +452,11 @@
 }
 
 [data-theme="project-flow"] [data-slot="input"] {
-  @apply rounded-none shadow-none focus-visible:ring-1;
+  @apply rounded-lg shadow-none focus-visible:ring-2;
 }
 
 [data-theme="project-flow"] [data-slot="label"] {
-  @apply text-xs;
+  @apply text-xs font-medium;
 }
 
 /* ===== Pulse theme — style overrides ===== */
