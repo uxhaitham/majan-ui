@@ -6,6 +6,10 @@ import { ComponentPage } from "@/pages/component-page"
 import { ComponentsIndex } from "@/pages/components-index"
 import { PlaceholderPage } from "@/pages/placeholder-page"
 import { BlockPage, BlockPreviewPage } from "@/pages/block-page"
+import {
+  PrototypePage,
+  PrototypePreviewPage,
+} from "@/pages/prototype-page"
 import type { ComponentMeta } from "@/lib/registry-config"
 
 function SidebarLayout({
@@ -51,8 +55,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Standalone preview — no site header/sidebar */}
+        {/* Standalone previews — no site header/sidebar */}
         <Route path="/blocks/:name/preview" element={<BlockPreviewPage />} />
+        <Route
+          path="/prototyping/:project/:view/preview"
+          element={<PrototypePreviewPage />}
+        />
 
         {/* Docs site shell */}
         <Route element={<DocsLayout />}>
@@ -93,6 +101,11 @@ export default function App() {
               }
             />
           </Route>
+          <Route path="/prototyping/:project" element={<PrototypePage />} />
+          <Route
+            path="/prototyping/:project/:view"
+            element={<PrototypePage />}
+          />
           <Route
             path="*"
             element={
