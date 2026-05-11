@@ -155,6 +155,18 @@
       ]
     },
     {
+      "name": "form",
+      "type": "registry:ui",
+      "dependencies": ["react-hook-form", "@hookform/resolvers", "zod", "radix-ui"],
+      "registryDependencies": ["utils", "label", "button", "input"],
+      "files": [
+        {
+          "path": "src/components/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],

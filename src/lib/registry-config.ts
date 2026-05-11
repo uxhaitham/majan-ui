@@ -43,6 +43,12 @@ export const components: ComponentMeta[] = [
     group: "Inputs",
   },
   {
+    name: "form",
+    description: "React Hook Form integration: FormField + FormItem + FormLabel + FormControl + FormMessage.",
+    category: "components",
+    group: "Inputs",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
