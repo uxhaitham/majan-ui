@@ -193,6 +193,7 @@
 
 /* ===== Tailwind v4 theme mapping ===== */
 @theme inline {
+  --font-serif: 'Iowan Old Style', 'Apple Garamond', Georgia, serif;
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
   --color-background: var(--background);
