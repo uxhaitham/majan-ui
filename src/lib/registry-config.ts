@@ -43,6 +43,12 @@ export const components: ComponentMeta[] = [
     group: "Feedback",
   },
   {
+    name: "empty",
+    description: "Empty-state placeholder with icon, title, description, and CTA slots.",
+    category: "components",
+    group: "Feedback",
+  },
+  {
     name: "label",
     description: "Renders an accessible label for form controls.",
     category: "components",
