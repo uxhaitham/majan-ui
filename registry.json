@@ -211,6 +211,17 @@
       ]
     },
     {
+      "name": "auth-layout",
+      "type": "registry:component",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "src/components/auth-layout.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],

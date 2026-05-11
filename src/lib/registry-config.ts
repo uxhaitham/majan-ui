@@ -73,6 +73,12 @@ export const components: ComponentMeta[] = [
     group: "Patterns",
   },
   {
+    name: "auth-layout",
+    description: "Full-bleed split layout for sign-in / sign-up with optional marketing pane and brand slot.",
+    category: "components",
+    group: "Patterns",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
