@@ -31,6 +31,12 @@ export const components: ComponentMeta[] = [
     group: "Inputs",
   },
   {
+    name: "textarea",
+    description: "Multi-line text input with auto-sizing and consistent token styling.",
+    category: "components",
+    group: "Inputs",
+  },
+  {
     name: "label",
     description: "Renders an accessible label for form controls.",
     category: "components",
