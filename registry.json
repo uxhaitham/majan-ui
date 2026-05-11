@@ -167,6 +167,17 @@
       ]
     },
     {
+      "name": "notification-row",
+      "type": "registry:component",
+      "registryDependencies": ["utils", "badge"],
+      "files": [
+        {
+          "path": "src/components/notification-row.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],

@@ -49,6 +49,12 @@ export const components: ComponentMeta[] = [
     group: "Inputs",
   },
   {
+    name: "notification-row",
+    description: "Notification row with bilingual title/body, priority indicator, relative time, and onSelect callback.",
+    category: "components",
+    group: "Patterns",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
