@@ -1,0 +1,46 @@
+/*
+ * Brief-Flow elevation tokens — three-tier surface system + four-step shadow scale.
+ *
+ * Derived from the Claude Design prototype (2026-05-11). Token names follow majan-ui
+ * convention (not the prototype's --paper / --ink names).
+ *
+ * Surface tier mapping (prototype → token):
+ *   --canvas    → --surface-canvas   (outermost background, lowest tier)
+ *   --paper-2   → --surface-sheet    (page/sheet surface, mid tier)
+ *   --paper     → --surface-card     (cards, islands, lifted elements, top tier)
+ *
+ * Shadow scale mapping (prototype → token):
+ *   --sh-1      → --shadow-resting   (resting cards, stat blocks)
+ *   --sh-2      → --shadow-raised    (hovered rows, focused islands, page shells)
+ *   --sh-3      → --shadow-overlay   (menus, modals, floating panels)
+ *   --sh-inset  → --shadow-inset     (inset highlight on primary buttons, stat cells)
+ *
+ * Light: warm-tinted shadows (oklch warm-gray at low opacity).
+ * Dark:  black-with-top-highlight recipe (preserved intact from prototype).
+ */
+
+:root {
+  /* ── Surface tiers (light) ── */
+  --surface-canvas: oklch(0.89 0.018 72);
+  --surface-sheet:  oklch(0.948 0.014 78);
+  --surface-card:   oklch(0.985 0.011 82);
+
+  /* ── Shadow scale (light — warm-tinted) ── */
+  --shadow-resting: 0 1px 0 oklch(0.93 0.008 80), 0 1px 2px -1px oklch(0.5 0.02 60 / 0.10), 0 4px 10px -4px oklch(0.5 0.02 60 / 0.14);
+  --shadow-raised:  0 1px 0 oklch(0.92 0.008 80), 0 3px 8px -2px oklch(0.5 0.02 60 / 0.16), 0 10px 24px -8px oklch(0.5 0.02 60 / 0.22);
+  --shadow-overlay: 0 12px 30px -8px oklch(0.4 0.02 60 / 0.28), 0 2px 6px -2px oklch(0.4 0.02 60 / 0.18);
+  --shadow-inset:   inset 0 1px 0 oklch(1 0 0 / 0.55);
+}
+
+.dark {
+  /* ── Surface tiers (dark) ── */
+  --surface-canvas: oklch(0.155 0.012 70);
+  --surface-sheet:  oklch(0.205 0.011 72);
+  --surface-card:   oklch(0.245 0.012 75);
+
+  /* ── Shadow scale (dark — black-with-top-highlight) ── */
+  --shadow-resting: 0 1px 0 oklch(1 0 0 / 0.04), 0 1px 2px -1px oklch(0 0 0 / 0.4), 0 4px 10px -4px oklch(0 0 0 / 0.5);
+  --shadow-raised:  0 1px 0 oklch(1 0 0 / 0.05), 0 3px 8px -2px oklch(0 0 0 / 0.5), 0 10px 24px -8px oklch(0 0 0 / 0.6);
+  --shadow-overlay: 0 1px 0 oklch(1 0 0 / 0.06), 0 12px 30px -8px oklch(0 0 0 / 0.7), 0 2px 6px -2px oklch(0 0 0 / 0.5);
+  --shadow-inset:   inset 0 1px 0 oklch(1 0 0 / 0.06);
+}

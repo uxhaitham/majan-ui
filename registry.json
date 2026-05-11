@@ -261,11 +261,16 @@
     {
       "name": "utils",
       "type": "registry:lib",
+      "version": "0.1.0",
       "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
           "path": "src/lib/utils.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "src/lib/utils.css",
+          "type": "registry:css"
         }
       ]
     }
