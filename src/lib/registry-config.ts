@@ -61,6 +61,12 @@ export const components: ComponentMeta[] = [
     group: "Patterns",
   },
   {
+    name: "stat-hero",
+    description: "Detail-page hero card with title, subtitle, badges, metadata grid, and actions.",
+    category: "components",
+    group: "Patterns",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
