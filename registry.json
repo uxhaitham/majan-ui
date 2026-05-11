@@ -200,6 +200,17 @@
       ]
     },
     {
+      "name": "timeline",
+      "type": "registry:component",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "src/components/timeline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],

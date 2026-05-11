@@ -67,6 +67,12 @@ export const components: ComponentMeta[] = [
     group: "Patterns",
   },
   {
+    name: "timeline",
+    description: "Vertical timeline for mixed event / comment / status-change items with tone-tinted markers.",
+    category: "components",
+    group: "Patterns",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
