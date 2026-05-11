@@ -37,6 +37,12 @@ export const components: ComponentMeta[] = [
     group: "Inputs",
   },
   {
+    name: "field",
+    description: "Form field composition: label, control, description, and error in one shape.",
+    category: "components",
+    group: "Inputs",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",

@@ -143,6 +143,18 @@
       ]
     },
     {
+      "name": "field",
+      "type": "registry:ui",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["utils", "label", "separator"],
+      "files": [
+        {
+          "path": "src/components/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],
