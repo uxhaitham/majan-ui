@@ -178,6 +178,17 @@
       ]
     },
     {
+      "name": "time-grouped-list",
+      "type": "registry:component",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "src/components/time-grouped-list.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "registryDependencies": ["utils"],

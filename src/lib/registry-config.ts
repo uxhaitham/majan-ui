@@ -55,6 +55,12 @@ export const components: ComponentMeta[] = [
     group: "Patterns",
   },
   {
+    name: "time-grouped-list",
+    description: "Groups items into Today / Yesterday / This week / Older sections (Asia/Muscat-aware).",
+    category: "components",
+    group: "Patterns",
+  },
+  {
     name: "alert",
     description: "Surface a brief message with default or destructive variant.",
     category: "components",
