@@ -49,6 +49,12 @@ export const components: ComponentMeta[] = [
     group: "Feedback",
   },
   {
+    name: "dialog",
+    description: "Modal overlay for confirmations and focused workflows. Radix-powered.",
+    category: "components",
+    group: "Overlay",
+  },
+  {
     name: "label",
     description: "Renders an accessible label for form controls.",
     category: "components",
