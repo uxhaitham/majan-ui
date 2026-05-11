@@ -37,6 +37,12 @@ export const components: ComponentMeta[] = [
     group: "Inputs",
   },
   {
+    name: "alert",
+    description: "Surface a brief message with default or destructive variant.",
+    category: "components",
+    group: "Feedback",
+  },
+  {
     name: "label",
     description: "Renders an accessible label for form controls.",
     category: "components",
