@@ -18,6 +18,8 @@ const NAV_ITEMS = [
 const PROTOTYPE_PROJECTS = [
   { label: "Pulse", path: "/prototyping/pulse" },
   { label: "Project Flow", path: "/prototyping/project-flow" },
+  { label: "Suqair Tools", path: "/prototyping/suqair-tools" },
+  { label: "Qais", path: "/prototyping/qais" },
 ]
 
 const THEMES: { value: Theme; label: string }[] = [
@@ -25,6 +27,17 @@ const THEMES: { value: Theme; label: string }[] = [
   { value: "khawarizmi", label: "Khawarizmi" },
   { value: "project-flow", label: "Project Flow" },
   { value: "pulse", label: "Pulse" },
+  { value: "qais", label: "Qais" },
+  { value: "suqair", label: "Suqair" },
+  { value: "suqair-v2", label: "Suqair v2" },
+  { value: "suqair-v3", label: "Suqair v3" },
+  { value: "suqair-v3a", label: "v3a Blue+Sand" },
+  { value: "suqair-v3b", label: "v3b Blue+Blush" },
+  { value: "suqair-v3c", label: "v3c Blue+Mint" },
+  { value: "suqair-v3d", label: "v3d Blue+Mauve" },
+  { value: "suqair-v3e", label: "v3e Blue+Soft Amber" },
+  { value: "marsad", label: "Marsad" },
+  { value: "marsad-sand", label: "Marsad-Sand (alt)" },
 ]
 
 interface HeaderProps {
@@ -71,7 +84,7 @@ export function Header({
             ))}
 
             {/* Prototyping dropdown */}
-            <DropdownMenu>
+            <DropdownMenu dir={document.documentElement.dir as "ltr" | "rtl" | undefined}>
               <DropdownMenuTrigger
                 className={cn(
                   "inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
