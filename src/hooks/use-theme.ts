@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 
-export type Theme = "default" | "khawarizmi" | "project-flow" | "pulse"
+export type Theme = "default" | "khawarizmi" | "project-flow" | "pulse" | "qais" | "suqair" | "suqair-v2" | "suqair-v3" | "suqair-v3a" | "suqair-v3b" | "suqair-v3c" | "suqair-v3d" | "suqair-v3e" | "marsad" | "marsad-sand"
 export type Mode = "light" | "dark"
 
 const THEME_KEY = "majan-theme"

@@ -1,6 +1,12 @@
 import { Link, useLocation } from "react-router-dom"
-import { Sun, Moon, Search, Palette } from "lucide-react"
+import { Sun, Moon, Search, Palette, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import type { Theme, Mode } from "@/hooks/use-theme"
 
 const NAV_ITEMS = [
@@ -9,11 +15,29 @@ const NAV_ITEMS = [
   { label: "Charts", path: "/charts" },
 ]
 
+const PROTOTYPE_PROJECTS = [
+  { label: "Pulse", path: "/prototyping/pulse" },
+  { label: "Project Flow", path: "/prototyping/project-flow" },
+  { label: "Suqair Tools", path: "/prototyping/suqair-tools" },
+  { label: "Qais", path: "/prototyping/qais" },
+]
+
 const THEMES: { value: Theme; label: string }[] = [
   { value: "default", label: "Default" },
   { value: "khawarizmi", label: "Khawarizmi" },
   { value: "project-flow", label: "Project Flow" },
   { value: "pulse", label: "Pulse" },
+  { value: "qais", label: "Qais" },
+  { value: "suqair", label: "Suqair" },
+  { value: "suqair-v2", label: "Suqair v2" },
+  { value: "suqair-v3", label: "Suqair v3" },
+  { value: "suqair-v3a", label: "v3a Blue+Sand" },
+  { value: "suqair-v3b", label: "v3b Blue+Blush" },
+  { value: "suqair-v3c", label: "v3c Blue+Mint" },
+  { value: "suqair-v3d", label: "v3d Blue+Mauve" },
+  { value: "suqair-v3e", label: "v3e Blue+Soft Amber" },
+  { value: "marsad", label: "Marsad" },
+  { value: "marsad-sand", label: "Marsad-Sand (alt)" },
 ]
 
 interface HeaderProps {
@@ -58,6 +82,28 @@ export function Header({
                 {item.label}
               </Link>
             ))}
+
+            {/* Prototyping dropdown */}
+            <DropdownMenu dir={document.documentElement.dir as "ltr" | "rtl" | undefined}>
+              <DropdownMenuTrigger
+                className={cn(
+                  "inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                  location.pathname.startsWith("/prototyping")
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                Prototyping
+                <ChevronDown className="h-3.5 w-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {PROTOTYPE_PROJECTS.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link to={item.path}>{item.label}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
         </div>
 
